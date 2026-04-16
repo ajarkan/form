@@ -61,10 +61,10 @@
         .modal-content-open { transform: scale(1) translateY(0) !important; }
     </style>
 </head>
-<body class="text-gray-700 bg-white min-h-screen font-sans antialiased flex flex-col items-center relative">
+<body class="text-gray-700 bg-white sm:bg-emerald-50/50 min-h-screen font-sans antialiased sm:py-8 sm:px-6 lg:px-8 flex flex-col sm:items-center sm:justify-center relative">
 
-    <!-- CONTAINER UTAMA (TIDAK ADA BOX/SHADOW) -->
-    <main class="w-full max-w-3xl bg-white fade-in-up relative z-10 flex-1 flex flex-col">
+    <!-- CONTAINER UTAMA (KARTU PADA DESKTOP, FULL WIDTH PADA MOBILE) -->
+    <main class="w-full max-w-3xl bg-white sm:rounded-2xl sm:shadow-xl overflow-hidden border-none sm:border sm:border-gray-100 fade-in-up relative z-10 flex-1 flex flex-col sm:flex-none">
         
         <!-- HEADER IMAGE (GAYA GOOGLE FORM) -->
         <div class="h-32 md:h-48 w-full relative group bg-gray-200 shrink-0">
@@ -88,7 +88,7 @@
         <div class="h-2 w-full bg-emerald-600 shrink-0"></div>
 
         <!-- KONTEN FORMULIR -->
-        <div class="p-3 sm:p-6 md:p-10 flex-1">
+        <div class="p-4 sm:p-6 md:p-10 flex-1">
             
             <!-- Judul & Deskripsi -->
             <div class="mb-6 sm:mb-8 border-b border-gray-100 pb-4 sm:pb-6">
@@ -172,13 +172,11 @@
                         <div class="relative">
                             <!-- Update onchange untuk trigger updateScheduleOptions tanpa argumen -->
                             <select id="kelas-select" name="category" onchange="updateScheduleOptions()" class="w-full px-4 py-3 border border-emerald-300 rounded-lg bg-white font-medium text-gray-800 focus:ring-2 focus:ring-emerald-500 outline-none appearance-none cursor-pointer">
-                                <option value="" disabled selected>-- Pilih Salah Satu Program --</option>
-                                <option value="Baca Al-Quran">Kelas Baca Al-Quran (Qara'na)</option>
-                                <option value="Bahasa Arab">Kelas Bahasa Arab (Nahwu Shorof)</option>
-                                <option value="Fiqih">Kelas Fiqih Ibadah</option>
-                                <option value="Tajwid">Kelas Tajwid Intensif</option>
-                                <option value="Tafsir">Kelas Tafsir Al-Quran</option>
-                                <option value="Desain">Kelas Desain</option>
+                            <option value="" disabled selected>-- Pilih Salah Satu Program --</option>
+                            <option value="Baca Al-Quran">Kelas Baca Al-Quran (Qara'na)</option>
+                            <option value="Bahasa Arab">Kelas Bahasa Arab (Nahwu Shorof)</option>
+                            <option value="Fiqih Ibadah">Kelas Fiqih Ibadah</option>
+                            <option value="Tafsir & Tadabbur">Kelas Tafsir Al-Quran</option>
                             </select>
                             <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-emerald-600">
                                 <i class="fas fa-chevron-down"></i>
@@ -217,7 +215,7 @@
                             <label class="cursor-pointer">
                                 <input type="radio" name="ability" value="Al-Quran" class="peer sr-only">
                                 <div class="px-3 py-2 border border-emerald-200 bg-white text-center rounded-lg text-sm hover:bg-emerald-50 peer-checked:bg-emerald-600 peer-checked:text-white peer-checked:border-emerald-600 transition">
-                                    Lancar Al-Quran
+                                    Sudah Al-Quran
                                 </div>
                             </label>
                         </div>
@@ -307,10 +305,8 @@
         const CATEGORY_CAPACITY = {
             "Baca Al-Quran": 15,
             "Bahasa Arab": 25,
-            "Fiqih": 25,
-            "Tajwid": 20,
-            "Tafsir": 25,
-            "Desain": 20
+            "Fiqih Ibadah": 25,
+            "Tafsir & Tadabbur": 20
         };
         const DEFAULT_QUOTA = 15; // Kuota bawaan jika nama kelas tidak ada di daftar atas
 
@@ -320,12 +316,12 @@
                 selectValue: "Baca Al-Quran", 
                 schedules: {
                     'Laki-laki': [
-                        { type: 'Online', times: ['Senin & Rabu | 19.30 – 21.00', 'Sabtu & Ahad | 05.30 – 07.00'] },
-                        { type: 'Offline', times: ['Sabtu & Ahad | 08.00 – 09.30'] }
+                        { type: 'Online', times: ['Senin & Rabu | 06.30 – 08.00', 'Senin & Rabu | 10.00 – 11.30', 'Senin & Rabu | 18.30 – 20.00', 'Selasa & Kamis | 06.30 – 08.00', 'Selasa & Kamis | 10.00 – 11.30', 'Selasa & Kamis | 18.30 – 20.00', 'Sabtu & Ahad | 06.30 – 08.00', 'Sabtu & Ahad | 10.00 – 11.30'] },
+                        { type: 'Offline', times: ['Senin & Rabu | 06.30 – 08.00', 'Senin & Rabu | 10.00 – 11.30', 'Senin & Rabu | 18.30 – 20.00', 'Selasa & Kamis | 06.30 – 08.00', 'Selasa & Kamis | 10.00 – 11.30', 'Selasa & Kamis | 18.30 – 20.00', 'Sabtu & Ahad | 06.30 – 08.00', 'Sabtu & Ahad | 10.00 – 11.30'] }
                     ],
                     'Perempuan': [
-                        { type: 'Online', times: ['Selasa & Kamis | 08.00 – 09.30', 'Sabtu & Ahad | 16.00 – 17.30'] },
-                        { type: 'Offline', times: ['Ahad | 09.00 – 11.00'] }
+                        { type: 'Online', times: ['Senin & Rabu | 08.30 – 10.00', 'Senin & Rabu | 13.00 – 14.30', 'Senin & Rabu | 16.00 – 17.30', 'Selasa & Kamis | 08.30 – 10.00', 'Selasa & Kamis | 13.00 – 14.30', 'Selasa & Kamis | 16.00 – 17.30', 'Sabtu & Ahad | 08.30 – 10.00', 'Sabtu & Ahad | 13.00 – 14.30'] },
+                        { type: 'Offline', times: ['Senin & Rabu | 08.30 – 10.00', 'Senin & Rabu | 13.00 – 14.30', 'Senin & Rabu | 16.00 – 17.30', 'Selasa & Kamis | 08.30 – 10.00', 'Selasa & Kamis | 13.00 – 14.30', 'Selasa & Kamis | 16.00 – 17.30', 'Sabtu & Ahad | 08.30 – 10.00', 'Sabtu & Ahad | 13.00 – 14.30'] }
                     ]
                 }
             },
@@ -333,60 +329,38 @@
                 selectValue: "Bahasa Arab", 
                 schedules: {
                     'Laki-laki': [
-                        { type: 'Online', times: ['Senin & Rabu | 19.00 – 20.30'] },
-                        { type: 'Offline', times: ['Sabtu | 13.00 – 15.00'] }
+                        { type: 'Online', times: [] },
+                        { type: 'Offline', times: [] }
                     ],
                     'Perempuan': [
-                        { type: 'Online', times: ['Selasa & Kamis | 19.00 – 20.30'] },
-                        { type: 'Offline', times: ['Sabtu | 09.30 – 11.00'] }
+                        { type: 'Online', times: [] },
+                        { type: 'Offline', times: [] }
                     ]
                 }
             },
             fiqih: { 
-                selectValue: "Fiqih", 
+                selectValue: "Fiqih Ibadah", 
                 schedules: {
                     'Laki-laki': [
-                        { type: 'Online', times: ['Jumat | 20.00 – 21.30'] },
-                        { type: 'Offline', times: ['Ahad | 08.00 – 09.30'] }
+                        { type: 'Online', times: [] },
+                        { type: 'Offline', times: [] }
                     ],
                     'Perempuan': [
-                        { type: 'Online', times: [] }, 
-                        { type: 'Offline', times: ['Ahad | 10.00 – 11.30'] }
-                    ]
-                }
-            },
-            tajwid: { 
-                selectValue: "Tajwid", 
-                schedules: {
-                    'Laki-laki': [
-                        { type: 'Online', times: ['Selasa & Kamis | 19.30 – 21.00'] }
-                    ],
-                    'Perempuan': [
-                        { type: 'Online', times: ['Selasa & Kamis | 19.30 – 21.00'] }
+                        { type: 'Online', times: [] },
+                        { type: 'Offline', times: [] }
                     ]
                 }
             },
             tafsir: { 
-                selectValue: "Tafsir", 
+                selectValue: "Tafsir & Tadabbur", 
                 schedules: {
                     'Laki-laki': [
-                        { type: 'Online', times: ['Ahad | 08.00 – 09.30', 'Ahad | 13.00 – 14.30'] },
-                        { type: 'Offline', times: [] } 
+                        { type: 'Online', times: [] },
+                        { type: 'Offline', times: [] }
                     ],
                     'Perempuan': [
-                        { type: 'Online', times: ['Ahad | 08.00 – 09.30', 'Ahad | 09.30 – 11.00'] },
-                        { type: 'Offline', times: ['Ahad | 08.00 – 09.30'] }
-                    ]
-                }
-            },
-            desain: { 
-                selectValue: "Desain", 
-                schedules: {
-                    'Laki-laki': [
-                        { type: 'Online', times: ['Selasa & Kamis | 19.30 – 21.00'] }
-                    ],
-                    'Perempuan': [
-                        { type: 'Online', times: ['Selasa & Kamis | 19.30 – 21.00'] }
+                        { type: 'Online', times: [] },
+                        { type: 'Offline', times: [] }
                     ]
                 }
             }
@@ -499,7 +473,7 @@
                         content.className = "accordion-content bg-white border-t border-gray-100";
                         
                         const innerList = document.createElement('div');
-                        innerList.className = "p-3 space-y-2";
+                        innerList.className = "p-2 sm:p-3 space-y-2";
 
                         if (isClosed) {
                             innerList.innerHTML = `
@@ -512,6 +486,7 @@
                             group.times.forEach(time => {
                                 // Logic perhitungan format dan filtering data pendaftar (real-time)
                                 const isTimeClosed = time.toLowerCase().includes('tidak tersedia');
+                                // MURNI SEPERTI B. Formulir.html (Tanpa diotak atik)
                                 const formattedValue = time.includes('|') ? time.replace('|', `| ${group.type} |`) : `${group.type} - ${time}`;
                                 
                                 // CARI PENDAFTAR YANG COCOK DENGAN OPSI INI
@@ -535,7 +510,7 @@
                                 const containerClasses = isDisabled ? 'border-slate-200 bg-slate-50 opacity-80' : 'border-slate-200 bg-white hover:border-emerald-300 hover:shadow-sm cursor-pointer';
 
                                 const itemDiv = document.createElement('div');
-                                itemDiv.className = `flex flex-col p-2 sm:p-3 rounded-xl border transition duration-200 mb-2 relative overflow-hidden group ${containerClasses}`;
+                                itemDiv.className = `flex flex-col p-2.5 sm:p-3 rounded-xl border transition duration-200 mb-2 relative overflow-hidden group ${containerClasses}`;
                                 
                                 itemDiv.innerHTML = `
                                     <div class="flex justify-between items-center z-10 relative">

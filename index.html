@@ -61,10 +61,10 @@
         .modal-content-open { transform: scale(1) translateY(0) !important; }
     </style>
 </head>
-<body class="text-gray-700 bg-white sm:bg-emerald-50/50 min-h-screen font-sans antialiased flex flex-col sm:items-center sm:justify-center relative">
+<body class="text-gray-700 bg-white min-h-screen font-sans antialiased flex flex-col items-center relative">
 
-    <!-- CONTAINER UTAMA (KARTU PADA DESKTOP, FULL WIDTH PADA MOBILE) -->
-    <main class="w-full max-w-3xl bg-white sm:rounded-2xl sm:shadow-xl overflow-hidden border-none sm:border sm:border-gray-100 fade-in-up relative z-10 flex-1 flex flex-col sm:flex-none">
+    <!-- CONTAINER UTAMA (TIDAK ADA BOX/SHADOW) -->
+    <main class="w-full max-w-3xl bg-white fade-in-up relative z-10 flex-1 flex flex-col">
         
         <!-- HEADER IMAGE (GAYA GOOGLE FORM) -->
         <div class="h-32 md:h-48 w-full relative group bg-gray-200 shrink-0">
@@ -88,7 +88,7 @@
         <div class="h-2 w-full bg-emerald-600 shrink-0"></div>
 
         <!-- KONTEN FORMULIR -->
-        <div class="p-4 sm:p-6 md:p-10 flex-1">
+        <div class="p-3 sm:p-6 md:p-10 flex-1">
             
             <!-- Judul & Deskripsi -->
             <div class="mb-6 sm:mb-8 border-b border-gray-100 pb-4 sm:pb-6">
@@ -275,7 +275,7 @@
                     <i class="fas fa-users text-xl text-emerald-400"></i>
                     <h3 class="text-lg font-bold">Daftar Peserta</h3>
                 </div>
-                <p id="modal-schedule-title" class="text-slate-300 text-sm italic font-medium opacity-90 pl-8">Selasa & Kamis | Online | 06.30 – 08.00</p>
+                <p id="modal-schedule-title" class="text-slate-300 text-sm italic font-medium opacity-90 pl-8">Selasa & Kamis | Online | 06.30 - 08.00</p>
             </div>
             
             <!-- Body Modal -->
@@ -301,27 +301,26 @@
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz3Urh7RszE6LGDEFKJm7gS3kShJw_Ir6xruJNUos9uUlUPphHz2qnME4dxOcPfvmjw/exec'; 
 
         // === KONFIGURASI KAPASITAS / KUOTA PER KATEGORI KELAS ===
-        // Sesuaikan angka dengan kebutuhan Anda.
         const CATEGORY_CAPACITY = {
             "Baca Al-Quran": 15,
             "Bahasa Arab": 25,
             "Fiqih Ibadah": 25,
             "Tafsir & Tadabbur": 20
         };
-        const DEFAULT_QUOTA = 15; // Kuota bawaan jika nama kelas tidak ada di daftar atas
+        const DEFAULT_QUOTA = 15; 
 
-        // DATA KELAS DENGAN STRUKTUR BARU (BERDASARKAN GENDER)
+        // MENGGANTI SEMUA GARIS PANJANG DENGAN STRIP PENDEK (-) AGAR TIDAK ERROR (TANDA TANYA) DI SEMUA KOMPUTER!
         const classData = {
             quran: { 
                 selectValue: "Baca Al-Quran", 
                 schedules: {
                     'Laki-laki': [
-                        { type: 'Online', times: ['Senin & Rabu | 06.30 – 08.00', 'Senin & Rabu | 10.00 – 11.30', 'Senin & Rabu | 18.30 – 20.00', 'Selasa & Kamis | 06.30 – 08.00', 'Selasa & Kamis | 10.00 – 11.30', 'Selasa & Kamis | 18.30 – 20.00', 'Sabtu & Ahad | 06.30 – 08.00', 'Sabtu & Ahad | 10.00 – 11.30'] },
-                        { type: 'Offline', times: ['Senin & Rabu | 06.30 – 08.00', 'Senin & Rabu | 10.00 – 11.30', 'Senin & Rabu | 18.30 – 20.00', 'Selasa & Kamis | 06.30 – 08.00', 'Selasa & Kamis | 10.00 – 11.30', 'Selasa & Kamis | 18.30 – 20.00', 'Sabtu & Ahad | 06.30 – 08.00', 'Sabtu & Ahad | 10.00 – 11.30'] }
+                        { type: 'Online', times: ['Senin & Rabu | 06.30 - 08.00', 'Senin & Rabu | 10.00 - 11.30', 'Senin & Rabu | 18.30 - 20.00', 'Selasa & Kamis | 06.30 - 08.00', 'Selasa & Kamis | 10.00 - 11.30', 'Selasa & Kamis | 18.30 - 20.00', 'Sabtu & Ahad | 06.30 - 08.00', 'Sabtu & Ahad | 10.00 - 11.30'] },
+                        { type: 'Offline', times: ['Senin & Rabu | 06.30 - 08.00', 'Senin & Rabu | 10.00 - 11.30', 'Senin & Rabu | 18.30 - 20.00', 'Selasa & Kamis | 06.30 - 08.00', 'Selasa & Kamis | 10.00 - 11.30', 'Selasa & Kamis | 18.30 - 20.00', 'Sabtu & Ahad | 06.30 - 08.00', 'Sabtu & Ahad | 10.00 - 11.30'] }
                     ],
                     'Perempuan': [
-                        { type: 'Online', times: ['Senin & Rabu | 08.30 – 10.00', 'Senin & Rabu | 13.00 – 14.30', 'Senin & Rabu | 16.00 – 17.30', 'Selasa & Kamis | 08.30 – 10.00', 'Selasa & Kamis | 13.00 – 14.30', 'Selasa & Kamis | 16.00 – 17.30', 'Sabtu & Ahad | 08.30 – 10.00', 'Sabtu & Ahad | 13.00 – 14.30'] },
-                        { type: 'Offline', times: ['Senin & Rabu | 08.30 – 10.00', 'Senin & Rabu | 13.00 – 14.30', 'Senin & Rabu | 16.00 – 17.30', 'Selasa & Kamis | 08.30 – 10.00', 'Selasa & Kamis | 13.00 – 14.30', 'Selasa & Kamis | 16.00 – 17.30', 'Sabtu & Ahad | 08.30 – 10.00', 'Sabtu & Ahad | 13.00 – 14.30'] }
+                        { type: 'Online', times: ['Senin & Rabu | 08.30 - 10.00', 'Senin & Rabu | 13.00 - 14.30', 'Senin & Rabu | 16.00 - 17.30', 'Selasa & Kamis | 08.30 - 10.00', 'Selasa & Kamis | 13.00 - 14.30', 'Selasa & Kamis | 16.00 - 17.30', 'Sabtu & Ahad | 08.30 - 10.00', 'Sabtu & Ahad | 13.00 - 14.30'] },
+                        { type: 'Offline', times: ['Senin & Rabu | 08.30 - 10.00', 'Senin & Rabu | 13.00 - 14.30', 'Senin & Rabu | 16.00 - 17.30', 'Selasa & Kamis | 08.30 - 10.00', 'Selasa & Kamis | 13.00 - 14.30', 'Selasa & Kamis | 16.00 - 17.30', 'Sabtu & Ahad | 08.30 - 10.00', 'Sabtu & Ahad | 13.00 - 14.30'] }
                     ]
                 }
             },
@@ -372,14 +371,12 @@
         let globalParticipants = [];
         let isDataLoaded = false;
 
-        // Ambil data peserta secara background saat halaman dimuat
         function loadParticipantsData() {
             fetch(GOOGLE_SCRIPT_URL)
                 .then(res => res.json())
                 .then(data => {
                     globalParticipants = data;
                     isDataLoaded = true;
-                    // Render ulang jadwal (jika user keburu klik kelas sebelum data kelar di-load)
                     const classVal = document.getElementById('kelas-select').value;
                     const genderInput = document.querySelector('input[name="gender"]:checked');
                     if (classVal && genderInput) {
@@ -388,7 +385,7 @@
                 })
                 .catch(err => {
                     console.error("Gagal memuat data", err);
-                    isDataLoaded = true; // Supaya tidak loading terus, tapi kuota dianggap 0
+                    isDataLoaded = true; 
                     if (document.getElementById('kelas-select').value) updateScheduleOptions();
                 });
         }
@@ -418,7 +415,6 @@
                 return;
             }
 
-            // LOADING STATE JIKA DATA GOOGLE SCRIPT BELUM SELESAI
             if (!isDataLoaded) {
                 container.innerHTML = `
                     <div class="flex flex-col items-center justify-center p-8 bg-white/50 rounded-xl border border-slate-200 text-center">
@@ -430,7 +426,6 @@
                 return;
             }
 
-            // Dapatkan Limit Kuota untuk kelas yang sedang dipilih
             const currentQuota = CATEGORY_CAPACITY[selectedClassName] || DEFAULT_QUOTA;
 
             let selectedKey = null;
@@ -484,11 +479,10 @@
                             `;
                         } else {
                             group.times.forEach(time => {
-                                // MURNI SEPERTI B. Formulir - Copy.html
                                 const isTimeClosed = time.toLowerCase().includes('tidak tersedia');
+                                // Format yang akan dicocokkan & dikirim (Pasti pakai "-" bukan "–")
                                 const formattedValue = time.includes('|') ? time.replace('|', `| ${group.type} |`) : `${group.type} - ${time}`;
                                 
-                                // CARI PENDAFTAR YANG COCOK DENGAN OPSI INI
                                 const registered = globalParticipants.filter(p => 
                                     p.category === selectedClassName && 
                                     p.gender === selectedGender && 
@@ -499,11 +493,10 @@
                                 const isFull = count >= currentQuota;
                                 const isDisabled = isTimeClosed || isFull;
                                 
-                                // Kalkulasi Warna Progress Bar berdasarkan currentQuota
                                 const progressPercent = Math.min((count / currentQuota) * 100, 100);
-                                let progressColor = 'bg-emerald-500'; // Default hijau
-                                if (isFull) progressColor = 'bg-red-500'; // Penuh = Merah
-                                else if (progressPercent >= 70) progressColor = 'bg-amber-400'; // Hampir Penuh = Kuning/Orange
+                                let progressColor = 'bg-emerald-500';
+                                if (isFull) progressColor = 'bg-red-500';
+                                else if (progressPercent >= 70) progressColor = 'bg-amber-400';
 
                                 const disableAttr = isDisabled ? 'disabled' : '';
                                 const containerClasses = isDisabled ? 'border-slate-200 bg-slate-50 opacity-80' : 'border-slate-200 bg-white hover:border-emerald-300 hover:shadow-sm cursor-pointer';
@@ -513,23 +506,24 @@
                                 
                                 itemDiv.innerHTML = `
                                     <div class="flex justify-between items-center z-10 relative">
-                                        <label class="flex items-center gap-2 sm:gap-3 flex-1 ${isDisabled ? 'cursor-not-allowed' : 'cursor-pointer'}">
+                                        <label class="flex items-center gap-1.5 sm:gap-3 flex-1 ${isDisabled ? 'cursor-not-allowed' : 'cursor-pointer'}">
                                             <input type="radio" name="schedule" value="${formattedValue}" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 focus:ring-emerald-500 mt-0.5 shrink-0" required ${disableAttr} ${isFull ? 'data-full="true"' : ''}>
                                             <div class="flex flex-col">
-                                                <span class="text-[12px] sm:text-sm font-semibold text-slate-700 leading-snug ${isDisabled ? 'text-slate-400' : ''}">${time}</span>
+                                                <!-- BARIS YANG DIGANTI: MENGECILKAN TEKS DAN MERAPATKAN JARAK -->
+                                                <span class="text-[10.5px] min-[375px]:text-[10px] sm:text-sm font-semibold text-slate-700 leading-snug tracking-tight ${isDisabled ? 'text-slate-400' : ''}">${time}</span>
                                                 ${isFull ? '<span class="text-[9px] sm:text-[10px] text-red-500 font-bold uppercase tracking-wider mt-0.5"><i class="fas fa-exclamation-circle"></i> Kuota Penuh</span>' : ''}
                                             </div>
                                         </label>
                                         <div class="flex items-center gap-1.5 sm:gap-2 pl-1 sm:pl-2 shrink-0">
-                                            <div class="text-[10px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded ${isFull ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-600'}">
+                                            <div class="text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded ${isFull ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-600'}">
                                                 ${count}/${currentQuota}
                                             </div>
-                                            <button type="button" onclick="showParticipantsModal('${formattedValue}', '${time}')" class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-slate-50 border border-slate-200 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 hover:border-emerald-200 transition z-20 focus:outline-none shrink-0" title="Lihat Daftar Peserta">
-                                                <i class="fas fa-eye text-[11px] sm:text-sm"></i>
+                                            <button type="button" onclick="showParticipantsModal('${formattedValue}', '${time}')" class="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-slate-50 border border-slate-200 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 hover:border-emerald-200 transition z-20 focus:outline-none shrink-0" title="Lihat Daftar Peserta">
+                                                <i class="fas fa-eye text-[10px] sm:text-sm"></i>
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="mt-2 sm:mt-3 ml-6 sm:ml-8 mr-10 sm:mr-14 relative z-10">
+                                    <div class="mt-2 sm:mt-3 ml-5 sm:ml-7 mr-8 sm:mr-14 relative z-10">
                                         <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden border border-slate-200/50">
                                             <div class="h-1.5 rounded-full ${progressColor} transition-all duration-1000 ease-out" style="width: ${progressPercent}%"></div>
                                         </div>
@@ -537,10 +531,8 @@
                                     ${isFull ? '<div class="absolute inset-0 bg-red-50/10 pointer-events-none"></div>' : ''}
                                 `;
                                 
-                                // Jika tidak didisable, buat area kotak bisa diklik jadi radio button (UX yang baik)
                                 if(!isDisabled) {
                                     itemDiv.onclick = function(e) {
-                                        // Jangan trigger jika klik mata
                                         if(e.target.closest('button')) return; 
                                         const radio = this.querySelector('input[type="radio"]');
                                         if(radio) radio.checked = true;
@@ -593,20 +585,16 @@
             const classSelect = document.getElementById('kelas-select').value;
             const genderSelect = document.querySelector('input[name="gender"]:checked').value;
             
-            // Set Text Modal
             document.getElementById('modal-schedule-title').innerText = displayTime;
             
-            // Filter Data
             const participants = globalParticipants.filter(p => 
                 p.category === classSelect && 
                 p.gender === genderSelect && 
                 p.schedule === scheduleFormattedValue
             );
             
-            // Update UI Total
             document.getElementById('modal-count-badge').innerText = participants.length;
             
-            // Generate List
             const listContainer = document.getElementById('modal-participants-list');
             listContainer.innerHTML = '';
             
@@ -629,7 +617,6 @@
                 });
             }
             
-            // Show Modal dengan Animasi CSS
             const modal = document.getElementById('peserta-modal');
             const modalContent = document.getElementById('peserta-modal-content');
             
@@ -651,7 +638,6 @@
         document.getElementById('registration-form').addEventListener('submit', (e) => {
             e.preventDefault();
 
-            // Proteksi Tambahan: Jika tombol radionya secara paksa di-klik meski penuh
             const selectedRadio = document.querySelector('input[name="schedule"]:checked');
             if (selectedRadio && selectedRadio.hasAttribute('data-full')) {
                 alert('Maaf, kelas/jadwal yang Anda pilih sudah PENUH. Silakan pilih jadwal lain!');
@@ -661,7 +647,6 @@
             const btn = document.getElementById('btn-submit');
             const originalContent = btn.innerHTML;
             
-            // Loading State
             btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sedang Mengirim...';
             btn.disabled = true;
             btn.classList.add('opacity-75', 'cursor-not-allowed');

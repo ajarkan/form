@@ -61,13 +61,13 @@
         .modal-content-open { transform: scale(1) translateY(0) !important; }
     </style>
 </head>
-<body class="text-gray-700 bg-emerald-50/50 min-h-screen font-sans antialiased py-8 px-4 sm:px-6 lg:px-8 flex items-center justify-center relative">
+<body class="text-gray-700 bg-white min-h-screen font-sans antialiased flex flex-col items-center relative">
 
-    <!-- CONTAINER UTAMA (KARTU) -->
-    <main class="w-full max-w-3xl bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 fade-in-up relative z-10">
+    <!-- CONTAINER UTAMA (TIDAK ADA BOX/SHADOW) -->
+    <main class="w-full max-w-3xl bg-white fade-in-up relative z-10 flex-1 flex flex-col">
         
         <!-- HEADER IMAGE (GAYA GOOGLE FORM) -->
-        <div class="h-32 md:h-48 w-full relative group bg-gray-200">
+        <div class="h-32 md:h-48 w-full relative group bg-gray-200 shrink-0">
          
          <img src="https://lh3.googleusercontent.com/pw/AP1GczMvjSG62rRn_iDpkPpkEz7hObembthNen-fcPJxe9fz5e7PQLOBY0R00afUbBBfCXiLH1-u9d79jl3xfkUt_yVKjM3WYAd3uK51jfK-g2k-UCAa6km9qVUqWWyvdxzjuFhlNQ5B28KLSxXpAZxjQQ7X=w800-h256-s-no-gm?authuser=0" 
               alt="Header Mobile" 
@@ -85,15 +85,15 @@
     </div>
 
         <!-- LINE INDIKATOR ATAS (Opsional, ala Google Form) -->
-        <div class="h-2 w-full bg-emerald-600"></div>
+        <div class="h-2 w-full bg-emerald-600 shrink-0"></div>
 
         <!-- KONTEN FORMULIR -->
-        <div class="p-6 md:p-10">
+        <div class="p-3 sm:p-6 md:p-10 flex-1">
             
             <!-- Judul & Deskripsi -->
-            <div class="mb-8 border-b border-gray-100 pb-6">
-                <h2 class="text-2xl md:text-3xl font-bold text-emerald-900 mb-2">Formulir Pendaftaran Kelas Online & Offline</h2>
-                <p class="text-gray-500 text-sm md:text-base leading-relaxed">
+            <div class="mb-6 sm:mb-8 border-b border-gray-100 pb-4 sm:pb-6">
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-900 mb-2">Formulir Pendaftaran Kelas Online & Offline</h2>
+                <p class="text-gray-500 text-xs sm:text-sm md:text-base leading-relaxed">
                     Ahlan wa Sahlan! Silahkan lengkapi data diri Anda di bawah ini untuk bergabung. 
                     Pastikan nomor WhatsApp yang dimasukkan aktif untuk keperluan konfirmasi jadwal.
                 </p>
@@ -103,7 +103,7 @@
             <form id="registration-form" class="space-y-6">
                 
                 <!-- 1. IDENTITAS DIRI -->
-                <div class="bg-gray-50 p-5 rounded-xl border border-gray-100 space-y-4">
+                <div class="bg-gray-50 p-4 sm:p-5 rounded-xl border border-gray-100 space-y-4">
                     <h3 class="font-bold text-gray-800 border-b border-gray-200 pb-2 mb-2"><i class="fas fa-user-circle text-emerald-600 mr-2"></i>Identitas Diri</h3>
                     
                     <!-- Nama Lengkap -->
@@ -120,7 +120,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin <span class="text-red-500">*</span></label>
-                            <div class="flex gap-4 mt-1">
+                            <div class="flex gap-2 sm:gap-4 mt-1">
                                 <!-- Tambahkan onchange="updateScheduleOptions()" di sini -->
                                 <label class="cursor-pointer flex-1">
                                     <input type="radio" name="gender" value="Laki-laki" class="peer sr-only" required onchange="updateScheduleOptions()">
@@ -140,7 +140,7 @@
                 </div>
 
                 <!-- 2. KONTAK & ALAMAT -->
-                <div class="bg-gray-50 p-5 rounded-xl border border-gray-100 space-y-4">
+                <div class="bg-gray-50 p-4 sm:p-5 rounded-xl border border-gray-100 space-y-4">
                     <h3 class="font-bold text-gray-800 border-b border-gray-200 pb-2 mb-2"><i class="fas fa-address-book text-emerald-600 mr-2"></i>Kontak & Alamat</h3>
                     
                     <!-- WhatsApp -->
@@ -163,7 +163,7 @@
                 </div>
 
                 <!-- 3. PEMILIHAN KELAS (INTI) -->
-                <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-100 space-y-4">
+                <div class="bg-emerald-50 p-4 sm:p-5 rounded-xl border border-emerald-100 space-y-4">
                     <h3 class="font-bold text-emerald-900 border-b border-emerald-200 pb-2 mb-2"><i class="fas fa-book-open text-emerald-600 mr-2"></i>Pilihan Program</h3>
 
                     <!-- Dropdown Kelas -->
@@ -172,11 +172,13 @@
                         <div class="relative">
                             <!-- Update onchange untuk trigger updateScheduleOptions tanpa argumen -->
                             <select id="kelas-select" name="category" onchange="updateScheduleOptions()" class="w-full px-4 py-3 border border-emerald-300 rounded-lg bg-white font-medium text-gray-800 focus:ring-2 focus:ring-emerald-500 outline-none appearance-none cursor-pointer">
-                            <option value="" disabled selected>-- Pilih Salah Satu Program --</option>
-                            <option value="Baca Al-Quran">Kelas Baca Al-Quran (Qara'na)</option>
-                            <option value="Bahasa Arab">Kelas Bahasa Arab (Nahwu Shorof)</option>
-                            <option value="Fiqih Ibadah">Kelas Fiqih Ibadah</option>
-                            <option value="Tafsir & Tadabbur">Kelas Tafsir Al-Quran</option>
+                                <option value="" disabled selected>-- Pilih Salah Satu Program --</option>
+                                <option value="Baca Al-Quran">Kelas Baca Al-Quran (Qara'na)</option>
+                                <option value="Bahasa Arab">Kelas Bahasa Arab (Nahwu Shorof)</option>
+                                <option value="Fiqih">Kelas Fiqih Ibadah</option>
+                                <option value="Tajwid">Kelas Tajwid Intensif</option>
+                                <option value="Tafsir">Kelas Tafsir Al-Quran</option>
+                                <option value="Desain">Kelas Desain</option>
                             </select>
                             <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-emerald-600">
                                 <i class="fas fa-chevron-down"></i>
@@ -215,7 +217,7 @@
                             <label class="cursor-pointer">
                                 <input type="radio" name="ability" value="Al-Quran" class="peer sr-only">
                                 <div class="px-3 py-2 border border-emerald-200 bg-white text-center rounded-lg text-sm hover:bg-emerald-50 peer-checked:bg-emerald-600 peer-checked:text-white peer-checked:border-emerald-600 transition">
-                                    Sudah Al-Quran
+                                    Lancar Al-Quran
                                 </div>
                             </label>
                         </div>
@@ -256,7 +258,7 @@
         </div>
         
         <!-- FOOTER CARD -->
-        <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 text-center">
+        <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 text-center shrink-0">
             <p class="text-xs text-gray-400">&copy; 2024 Madrasah Ilmi. All Rights Reserved.</p>
         </div>
     </main>
@@ -301,70 +303,94 @@
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz3Urh7RszE6LGDEFKJm7gS3kShJw_Ir6xruJNUos9uUlUPphHz2qnME4dxOcPfvmjw/exec'; 
 
         // === KONFIGURASI KAPASITAS / KUOTA PER KATEGORI KELAS ===
-// Sesuaikan angka dengan kebutuhan Anda.
-const CATEGORY_CAPACITY = {
-    "Baca Al-Quran": 15,
-    "Bahasa Arab": 25,
-    "Fiqih Ibadah": 25,
-    "Tafsir & Tadabbur": 20
-};
-const DEFAULT_QUOTA = 15; // Kuota bawaan jika nama kelas tidak ada di daftar atas
+        // Sesuaikan angka dengan kebutuhan Anda.
+        const CATEGORY_CAPACITY = {
+            "Baca Al-Quran": 15,
+            "Bahasa Arab": 25,
+            "Fiqih": 25,
+            "Tajwid": 20,
+            "Tafsir": 25,
+            "Desain": 20
+        };
+        const DEFAULT_QUOTA = 15; // Kuota bawaan jika nama kelas tidak ada di daftar atas
 
-// DATA KELAS DENGAN STRUKTUR BARU (BERDASARKAN GENDER)
-const classData = {
-    quran: { 
-        selectValue: "Baca Al-Quran", 
-        schedules: {
-            'Laki-laki': [
-                { type: 'Online', times: ['Senin & Rabu | 06.30 – 08.00', 'Senin & Rabu | 10.00 – 11.30', 'Senin & Rabu | 18.30 – 20.00', 'Selasa & Kamis | 06.30 – 08.00', 'Selasa & Kamis | 10.00 – 11.30', 'Selasa & Kamis | 18.30 – 20.00', 'Sabtu & Ahad | 06.30 – 08.00', 'Sabtu & Ahad | 10.00 – 11.30'] },
-                { type: 'Offline', times: ['Senin & Rabu | 06.30 – 08.00', 'Senin & Rabu | 10.00 – 11.30', 'Senin & Rabu | 18.30 – 20.00', 'Selasa & Kamis | 06.30 – 08.00', 'Selasa & Kamis | 10.00 – 11.30', 'Selasa & Kamis | 18.30 – 20.00', 'Sabtu & Ahad | 06.30 – 08.00', 'Sabtu & Ahad | 10.00 – 11.30'] }
-            ],
-            'Perempuan': [
-                { type: 'Online', times: ['Senin & Rabu | 08.30 – 10.00', 'Senin & Rabu | 13.00 – 14.30', 'Senin & Rabu | 16.00 – 17.30', 'Selasa & Kamis | 08.30 – 10.00', 'Selasa & Kamis | 13.00 – 14.30', 'Selasa & Kamis | 16.00 – 17.30', 'Sabtu & Ahad | 08.30 – 10.00', 'Sabtu & Ahad | 13.00 – 14.30'] },
-                { type: 'Offline', times: ['Senin & Rabu | 08.30 – 10.00', 'Senin & Rabu | 13.00 – 14.30', 'Senin & Rabu | 16.00 – 17.30', 'Selasa & Kamis | 08.30 – 10.00', 'Selasa & Kamis | 13.00 – 14.30', 'Selasa & Kamis | 16.00 – 17.30', 'Sabtu & Ahad | 08.30 – 10.00', 'Sabtu & Ahad | 13.00 – 14.30'] }
-            ]
-        }
-    },
-    arab: { 
-        selectValue: "Bahasa Arab", 
-        schedules: {
-            'Laki-laki': [
-                { type: 'Online', times: [] },
-                { type: 'Offline', times: [] }
-            ],
-            'Perempuan': [
-                { type: 'Online', times: [] },
-                { type: 'Offline', times: [] }
-            ]
-        }
-    },
-    fiqih: { 
-        selectValue: "Fiqih Ibadah", 
-        schedules: {
-            'Laki-laki': [
-                { type: 'Online', times: [] },
-                { type: 'Offline', times: [] }
-            ],
-            'Perempuan': [
-                { type: 'Online', times: [] },
-                { type: 'Offline', times: [] }
-            ]
-        }
-    },
-    tafsir: { 
-        selectValue: "Tafsir & Tadabbur", 
-        schedules: {
-            'Laki-laki': [
-                { type: 'Online', times: [] },
-                { type: 'Offline', times: [] }
-            ],
-            'Perempuan': [
-                { type: 'Online', times: [] },
-                { type: 'Offline', times: [] }
-            ]
-        }
-    }
-};
+        // DATA KELAS DENGAN STRUKTUR BARU (BERDASARKAN GENDER)
+        const classData = {
+            quran: { 
+                selectValue: "Baca Al-Quran", 
+                schedules: {
+                    'Laki-laki': [
+                        { type: 'Online', times: ['Senin & Rabu | 19.30 – 21.00', 'Sabtu & Ahad | 05.30 – 07.00'] },
+                        { type: 'Offline', times: ['Sabtu & Ahad | 08.00 – 09.30'] }
+                    ],
+                    'Perempuan': [
+                        { type: 'Online', times: ['Selasa & Kamis | 08.00 – 09.30', 'Sabtu & Ahad | 16.00 – 17.30'] },
+                        { type: 'Offline', times: ['Ahad | 09.00 – 11.00'] }
+                    ]
+                }
+            },
+            arab: { 
+                selectValue: "Bahasa Arab", 
+                schedules: {
+                    'Laki-laki': [
+                        { type: 'Online', times: ['Senin & Rabu | 19.00 – 20.30'] },
+                        { type: 'Offline', times: ['Sabtu | 13.00 – 15.00'] }
+                    ],
+                    'Perempuan': [
+                        { type: 'Online', times: ['Selasa & Kamis | 19.00 – 20.30'] },
+                        { type: 'Offline', times: ['Sabtu | 09.30 – 11.00'] }
+                    ]
+                }
+            },
+            fiqih: { 
+                selectValue: "Fiqih", 
+                schedules: {
+                    'Laki-laki': [
+                        { type: 'Online', times: ['Jumat | 20.00 – 21.30'] },
+                        { type: 'Offline', times: ['Ahad | 08.00 – 09.30'] }
+                    ],
+                    'Perempuan': [
+                        { type: 'Online', times: [] }, 
+                        { type: 'Offline', times: ['Ahad | 10.00 – 11.30'] }
+                    ]
+                }
+            },
+            tajwid: { 
+                selectValue: "Tajwid", 
+                schedules: {
+                    'Laki-laki': [
+                        { type: 'Online', times: ['Selasa & Kamis | 19.30 – 21.00'] }
+                    ],
+                    'Perempuan': [
+                        { type: 'Online', times: ['Selasa & Kamis | 19.30 – 21.00'] }
+                    ]
+                }
+            },
+            tafsir: { 
+                selectValue: "Tafsir", 
+                schedules: {
+                    'Laki-laki': [
+                        { type: 'Online', times: ['Ahad | 08.00 – 09.30', 'Ahad | 13.00 – 14.30'] },
+                        { type: 'Offline', times: [] } 
+                    ],
+                    'Perempuan': [
+                        { type: 'Online', times: ['Ahad | 08.00 – 09.30', 'Ahad | 09.30 – 11.00'] },
+                        { type: 'Offline', times: ['Ahad | 08.00 – 09.30'] }
+                    ]
+                }
+            },
+            desain: { 
+                selectValue: "Desain", 
+                schedules: {
+                    'Laki-laki': [
+                        { type: 'Online', times: ['Selasa & Kamis | 19.30 – 21.00'] }
+                    ],
+                    'Perempuan': [
+                        { type: 'Online', times: ['Selasa & Kamis | 19.30 – 21.00'] }
+                    ]
+                }
+            }
+        };
 
         /* -----------------------------------------------------
            LOGIC REAL-TIME FETCH DARI GOOGLE SCRIPT
@@ -509,27 +535,27 @@ const classData = {
                                 const containerClasses = isDisabled ? 'border-slate-200 bg-slate-50 opacity-80' : 'border-slate-200 bg-white hover:border-emerald-300 hover:shadow-sm cursor-pointer';
 
                                 const itemDiv = document.createElement('div');
-                                itemDiv.className = `flex flex-col p-3 rounded-xl border transition duration-200 mb-2 relative overflow-hidden group ${containerClasses}`;
+                                itemDiv.className = `flex flex-col p-2 sm:p-3 rounded-xl border transition duration-200 mb-2 relative overflow-hidden group ${containerClasses}`;
                                 
                                 itemDiv.innerHTML = `
                                     <div class="flex justify-between items-center z-10 relative">
-                                        <label class="flex items-center gap-3 flex-1 ${isDisabled ? 'cursor-not-allowed' : 'cursor-pointer'}">
-                                            <input type="radio" name="schedule" value="${formattedValue}" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 mt-0.5" required ${disableAttr} ${isFull ? 'data-full="true"' : ''}>
+                                        <label class="flex items-center gap-1.5 sm:gap-3 flex-1 ${isDisabled ? 'cursor-not-allowed' : 'cursor-pointer'}">
+                                            <input type="radio" name="schedule" value="${formattedValue}" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 focus:ring-emerald-500 mt-0.5 shrink-0" required ${disableAttr} ${isFull ? 'data-full="true"' : ''}>
                                             <div class="flex flex-col">
-                                                <span class="text-sm font-semibold text-slate-700 ${isDisabled ? 'text-slate-400' : ''}">${time}</span>
-                                                ${isFull ? '<span class="text-[10px] text-red-500 font-bold uppercase tracking-wider mt-0.5"><i class="fas fa-exclamation-circle"></i> Kuota Penuh</span>' : ''}
+                                                <span class="text-[11px] sm:text-sm font-semibold text-slate-700 leading-snug ${isDisabled ? 'text-slate-400' : ''}">${time}</span>
+                                                ${isFull ? '<span class="text-[9px] sm:text-[10px] text-red-500 font-bold uppercase tracking-wider mt-0.5"><i class="fas fa-exclamation-circle"></i> Kuota Penuh</span>' : ''}
                                             </div>
                                         </label>
-                                        <div class="flex items-center gap-2 pl-2">
-                                            <div class="text-xs font-bold px-2 py-1 rounded ${isFull ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-600'}">
+                                        <div class="flex items-center gap-1.5 sm:gap-2 pl-1 sm:pl-2 shrink-0">
+                                            <div class="text-[9px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded ${isFull ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-600'}">
                                                 ${count}/${currentQuota}
                                             </div>
-                                            <button type="button" onclick="showParticipantsModal('${formattedValue}', '${time}')" class="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-50 border border-slate-200 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 hover:border-emerald-200 transition z-20 focus:outline-none" title="Lihat Daftar Peserta">
-                                                <i class="fas fa-eye text-sm"></i>
+                                            <button type="button" onclick="showParticipantsModal('${formattedValue}', '${time}')" class="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-slate-50 border border-slate-200 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 hover:border-emerald-200 transition z-20 focus:outline-none shrink-0" title="Lihat Daftar Peserta">
+                                                <i class="fas fa-eye text-[10px] sm:text-sm"></i>
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="mt-3 ml-7 mr-14 relative z-10">
+                                    <div class="mt-2 sm:mt-3 ml-5 sm:ml-7 mr-8 sm:mr-14 relative z-10">
                                         <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden border border-slate-200/50">
                                             <div class="h-1.5 rounded-full ${progressColor} transition-all duration-1000 ease-out" style="width: ${progressPercent}%"></div>
                                         </div>
